@@ -1,0 +1,187 @@
+/* Lyle Light 1.4 — independently implemented from user-provided screenshots.
+ * Typora 1.9.5 / Windows. No external resources or scripts.
+ * Inter + Source Han Sans SC; larger screen text for comfortable reading.
+ * Other dimensions and colors remain estimates, not official design tokens. */
+:root {
+  --cx-font: "Inter", "Inter Variable", InterVariable, "Source Han Sans SC", "思源黑体", -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+  --cx-mono: "SFMono-Regular", "SF Mono", Menlo, Consolas, "Liberation Mono", "Source Han Sans SC", "思源黑体", "Microsoft YaHei UI", monospace;
+  --cx-width: 1000px;
+  --cx-size: 17px;
+  --cx-code-size: 14px;
+  --cx-leading: 1.75;
+  --cx-text: #202124;
+  --cx-muted: #6b7075;
+  --cx-blue: #087be6;
+  --cx-line: #e9ebed;
+  --cx-table-head-line: #b8bec6;
+  --cx-table-space: .6rem;
+  --cx-code-bg: #f7f8fa;
+  --cx-radius: 8px;
+  --cx-space: 1.25rem;
+  --cx-h1: 2rem;
+  --cx-h2: 1.625rem;
+  --cx-h3: 1.375rem;
+  --cx-h4: 1.125rem;
+  --cx-h5: 1rem;
+  --cx-h6: 1rem;
+  --cx-diagram-fill: #dfedf9;
+  --cx-diagram-line: #8b949b;
+  --bg-color: #fff;
+  --text-color: #202124;
+  --select-text-bg-color: #d9ecff;
+  --select-text-font-color: #202124;
+  --side-bar-bg-color: #f8f9fa;
+  --control-text-color: #626970;
+  --active-file-bg-color: #e8f1fa;
+  --active-file-text-color: #126abd;
+  --item-hover-bg-color: #eef3f7;
+  --primary-color: #087be6;
+  --primary-btn-border-color: #087be6;
+  --window-border: 1px solid #e9ebed;
+  --mermaid-theme: neutral;
+  --mermaid-font-family: var(--cx-font);
+  --mermaid-flowchart-curve: basis;
+}
+
+/* Page: max-width includes padding. Keep editor focus widgets outside text. */
+html { font-size: var(--cx-size); }
+body { font-family: var(--cx-font); font-weight: 400; color: var(--cx-text); background: #fff; line-height: var(--cx-leading); }
+#write { box-sizing: border-box; font-family: var(--cx-font); max-width: var(--cx-width); margin: 0 auto; padding: 40px 36px 100px; overflow-wrap: break-word; }
+#write > :first-child { margin-top: 0; }
+#write p, #write blockquote, #write ul, #write ol { margin-top: var(--cx-space); margin-bottom: var(--cx-space); }
+h1, h2, h3, h4, h5, h6 { color: #16181a; font-weight: 650; line-height: 1.4; margin: 2rem 0 1.15rem; padding: 0; border: 0; }
+h1 { font-size: var(--cx-h1); }
+h2 { font-size: var(--cx-h2); }
+h3 { font-size: var(--cx-h3); }
+h4 { font-size: var(--cx-h4); }
+h5 { font-size: var(--cx-h5); font-weight: 700; }
+h6 { font-size: var(--cx-h6); font-weight: 600; color: #555b60; }
+strong { font-weight: 700; }
+a { color: var(--cx-blue); text-decoration: underline; text-underline-offset: 3px; }
+#write a:hover { color: #005db8; }
+hr { border: 0; height: 1px; background: var(--cx-line); margin: 2.5rem 0; }
+
+/* Lists: retain Typora's native task input and list editing semantics. */
+ul, ol { padding-left: 1.8rem; }
+li { margin: .22rem 0; }
+li::marker { color: #8b9095; }
+#write li > ul, #write li > ol { margin: .3rem 0; }
+#write li > p { margin: .35rem 0; }
+.md-task-list-item { list-style: none; }
+.md-task-list-item > input { margin-left: -1.5em; margin-top: .45em; accent-color: var(--cx-blue); width: 1em; height: 1em; }
+.md-task-list-item.task-list-done { color: var(--cx-muted); }
+
+/* Each quote level uses the same contrast; no cumulative opacity. */
+blockquote { border-left: 3px solid #e2e5e8; padding: .1rem 0 .1rem 1.1rem; color: var(--cx-muted); background: transparent; }
+#write blockquote > :first-child { margin-top: 0; }
+#write blockquote > :last-child { margin-bottom: 0; }
+#write blockquote blockquote { margin: .8rem 0; color: var(--cx-muted); }
+
+/* Tables: horizontal rules only; native align attributes remain authoritative. */
+table { width: 100%; border-collapse: collapse; border-spacing: 0; font-size: .94rem; }
+/* Typora wraps tables in a scrollable figure: avoid double outer spacing. */
+#write table, #write .md-table-fig { margin-top: var(--cx-table-space); margin-bottom: var(--cx-table-space); }
+#write .md-table-fig > table { margin-top: 0; margin-bottom: 0; }
+#write p:has(+ .md-table-fig), #write p:has(+ table) { margin-bottom: var(--cx-table-space); }
+#write .md-table-fig + p, #write table + p { margin-top: var(--cx-table-space); }
+thead, tbody, tr { background: transparent; border: 0; }
+th, td { border: 0; border-bottom: 1px solid var(--cx-line); padding: .65rem .75rem; vertical-align: top; line-height: 1.65; }
+th { font-weight: 650; }
+#write table thead th { border-bottom: 1px solid var(--cx-table-head-line); }
+th:not([align]), td:not([align]) { text-align: left; }
+tr:last-child td { border-bottom: 0; }
+.md-table-fig { max-width: 100%; overflow-x: auto; }
+
+/* CodeMirror and exported code share the same palette. */
+code, tt, pre, .CodeMirror { font-family: var(--cx-mono); }
+code, tt { background: #f2f4f6; color: #30363c; border-radius: 4px; padding: .12em .3em; font-size: .9em; }
+.md-fences, #write > pre, #write details pre { background: var(--cx-code-bg); border: 1px solid #eef0f2; border-radius: var(--cx-radius); margin: 1.4rem 0; padding: 16px; font-size: var(--cx-code-size); line-height: 1.65; }
+.md-fences .CodeMirror { background: transparent; color: #30363c; }
+.CodeMirror-gutters { background: transparent; border-right: 1px solid #e5e8ec; }
+.CodeMirror-linenumber { color: #929aa2; }
+.CodeMirror-selected { background: #d9ecff; }
+.CodeMirror-cursor { border-left-color: #202124; }
+#write > pre, #write details pre { overflow-x: auto; }
+pre code { background: transparent; color: inherit; padding: 0; border: 0; border-radius: 0; font-size: inherit; }
+.cm-s-inner .cm-keyword, .cm-s-inner .cm-tag { color: #a62650; }
+.cm-s-inner .cm-string, .cm-s-inner .cm-string-2 { color: #24673e; }
+.cm-s-inner .cm-number, .cm-s-inner .cm-atom { color: #915a17; }
+.cm-s-inner .cm-def, .cm-s-inner .cm-builtin { color: #6b4eaa; }
+.cm-s-inner .cm-variable, .cm-s-inner .cm-property { color: #30363c; }
+.cm-s-inner .cm-variable-2, .cm-s-inner .cm-type, .cm-s-inner .cm-attribute { color: #136f98; }
+.cm-s-inner .cm-comment { color: #75808a; font-style: italic; }
+.cm-s-inner .cm-operator, .cm-s-inner .cm-meta { color: #59636d; }
+.cm-s-inner .cm-positive { color: #216e39; background: #e8f5e9; }
+.cm-s-inner .cm-negative { color: #b42332; background: #fff0f0; }
+.cm-s-inner .cm-error { color: #b42332; text-decoration: underline wavy; }
+.md-fences .md-fences { border: 0; margin: 0; padding: 0; }
+.md-lang { color: #77818b; }
+
+/* Math: leave the renderer's mathematical font and layout intact. */
+.mathjax-block { margin: 1.8rem 0; padding: .6rem 0; max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+.md-inline-math { color: inherit; }
+.md-mathjax-midline { background: #f7f9fb; }
+
+/* Mermaid SVG selectors are verified against the bundled renderer during QA.
+ * Scope strictly to diagrams. Never restyle arbitrary user SVGs. */
+.md-diagram-panel { margin: 1.5rem 0; }
+#write .md-fences-advanced:not(.md-focus),
+#write .md-fences:has(:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"])) { background: transparent; border-color: transparent; }
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) { text-align: center; overflow-x: auto; }
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) svg { max-width: 100%; height: auto; }
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) .node rect,
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) .node circle,
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) .node ellipse,
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) .node polygon,
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) .node path { fill: var(--cx-diagram-fill) !important; stroke: #a9c8df !important; }
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) .nodeLabel { color: #087be6 !important; }
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) .nodeLabel p { margin: 0 !important; }
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) .edgePath path,
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) .flowchart-link { stroke: var(--cx-diagram-line) !important; }
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) .edgeLabel { background-color: white !important; color: #087be6 !important; }
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) .actor { fill: var(--cx-diagram-fill) !important; stroke: var(--cx-blue) !important; }
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) text.actor { fill: var(--cx-text) !important; stroke: none !important; }
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) .actor-line,
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) .messageLine0,
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) .messageLine1 { stroke: var(--cx-diagram-line) !important; }
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) .task { fill: var(--cx-diagram-fill) !important; stroke: var(--cx-blue) !important; }
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) .taskText { fill: var(--cx-text) !important; }
+:is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) .task.done { fill: #f1f4f6 !important; stroke: #cbd3da !important; }
+
+/* Native HTML, images, footnotes. */
+img { max-width: 100%; height: auto; }
+kbd { font-family: var(--cx-font); font-size: .85em; background: #f7f8fa; border: 1px solid #dce1e6; border-bottom-width: 2px; border-radius: 4px; padding: .12em .45em; }
+mark { background: #fff0a8; color: #302c1d; border-radius: 2px; padding: .05em .15em; }
+sup, sub { font-size: .75em; line-height: 0; }
+details { margin: 1.25rem 0; padding: .85rem 1rem; border: 1px solid var(--cx-line); border-radius: var(--cx-radius); }
+summary { cursor: pointer; color: #315d80; font-weight: 600; }
+details[open] > summary { margin-bottom: .8rem; }
+.md-footnote { color: var(--cx-blue); }
+.footnotes { color: var(--cx-muted); font-size: .875rem; border-top: 1px solid var(--cx-line); }
+
+@media screen and (max-width: 700px) {
+  #write { padding: 24px 20px 64px; }
+  table { min-width: 540px; }
+  .md-fences { padding: 12px; }
+}
+
+/* A4: remove scrolling and fit content to the printable area. */
+@page { size: A4; margin: 18mm 16mm; }
+@media print {
+  :root { --cx-code-size: 12px; }
+  html { font-size: 10.5pt; }
+  body { background: #fff; color: #202124; }
+  #write { max-width: none; padding: 0; margin: 0; }
+  h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+  p { orphans: 3; widows: 3; }
+  table { min-width: 0; table-layout: auto; font-size: 8.5pt; }
+  th, td { padding: 5px 6px; overflow-wrap: anywhere; }
+  tr, img, .mathjax-block, .md-diagram-panel { break-inside: avoid; }
+  thead { display: table-header-group; }
+  pre, pre code, .md-fences { white-space: pre-wrap; overflow-wrap: anywhere; overflow: visible; }
+  .md-table-fig, .mathjax-block, :is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) { overflow: visible; }
+  :is(.md-diagram-panel-preview, .md-diagram-panel, [lang="mermaid"]) svg { max-height: 230mm; }
+  details > :not(summary) { display: block !important; }
+  details::details-content { content-visibility: visible; }
+  a { color: #126abd; }
+}
